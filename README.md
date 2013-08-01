@@ -1,3 +1,7 @@
+drakh LeapMotion addon
+=======================
+Just simple LeapMotion hand gestures for swipe left/right to control the Impress.JS presentation
+
 impress.js
 ============
 
