@@ -1,5 +1,3 @@
-<!doctype html>
-
 <!--
 
     Welcome to the light side of the source, young padawan.
@@ -68,11 +66,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=1024" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <title>impress.js | presentation tool based on the power of CSS3 transforms and transitions in modern browsers | by Bartek Szopka @bartaz</title>
-    
-    <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com." />
+    <title>impress.js | presentation tool based on the power of CSS3 transforms and transitions in modern browsers | by Bartek Szopka @bartaz | LeapMotion support by Lubomir Panak @drakh</title>
+    <meta name="description" content="impress.js is a presentation tool based on the power of CSS3 transforms and transitions in modern browsers and inspired by the idea behind prezi.com. Now With some force of LeapMotion" />
     <meta name="author" content="Bartek Szopka" />
-
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
 
     <!--
@@ -94,6 +90,9 @@
     
     <link rel="shortcut icon" href="favicon.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    
+    <!-- We here add MotionLeap manipulate with impress hands by -->
+    <script src="//js.leapmotion.com/0.2.0-beta1/leap.min.js"></script>
 </head>
 
 <!--
@@ -341,7 +340,7 @@
 </div>
 <script>
 if ("ontouchstart" in document.documentElement) { 
-    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate. Or with hands swipe you right or left, if LeapMotion you do have.</p>";
 }
 </script>
 
@@ -362,6 +361,27 @@ if ("ontouchstart" in document.documentElement) {
 -->
 <script src="js/impress.js"></script>
 <script>impress().init();</script>
+<script>
+Leap.loop({enableGestures:true}, function(obj) {
+if(obj.gestures[0])
+	{
+		
+		if(obj.gestures[0].type=='swipe' && obj.gestures[0].state=='stop')
+		{
+			if(obj.gestures[0].startPosition[0]-obj.gestures[0].position[0]>0)
+			{
+				//swipe left
+				impress().prev();
+			}
+			else 
+			{
+				//swipe right
+				impress().next();
+			}
+		}
+	}
+});
+</script>
 
 <!--
     
@@ -388,23 +408,33 @@ if ("ontouchstart" in document.documentElement) {
     
 -->
 
-
-<!-- social, tracking etc, ignore -->
-
 <div style="position: fixed; bottom: 10px; left: 10px; pointer-events: auto;">
-    <iframe style="border: 0; margin: 0; padding: 0;" src="https://www.gittip.com/bartaz/widget.html" width="50px" height="20px"></iframe>
+    <iframe style="border: 0; margin: 0; padding: 0;" src="https://www.gittip.com/drakh/widget.html" width="50px" height="20px"></iframe>
     
-    <iframe src="http://ghbtns.com/github-btn.html?user=bartaz&repo=impress.js&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
-    <iframe src="http://ghbtns.com/github-btn.html?user=bartaz&repo=impress.js&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+    <iframe src="http://ghbtns.com/github-btn.html?user=drakh&repo=leapmotion-impress.js&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+    <iframe src="http://ghbtns.com/github-btn.html?user=drakh&repo=leapmotion-impress.js&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
 
-    <a href="http://twitter.com/share" class="twitter-share-button" data-text="impress your audience with impress.js - a presentation tool based on the power of CSS3 transforms and transitions" data-url="http://bartaz.github.com/impress.js"></a>
+    <a href="http://twitter.com/share" class="twitter-share-button" data-text="LeapMotion to impress your audience with impress.js - a presentation tool based on the power of CSS3 transforms and transitions" data-url="http://drakh.github.com/leapmotion-impress.js"></a>
     <script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
+    
+	<!-- Place this tag where you want the +1 button to render. -->
+	<div class="g-plusone" data-annotation="inline" data-width="300"></div>
+
+	<!-- Place this tag after the last +1 button tag. -->
+	<script type="text/javascript">
+	  (function() {
+	    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+	    po.src = 'https://apis.google.com/js/plusone.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	  })();
+	</script>
 </div>
 
+<!-- dark side of the force -->
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-9117370-1']);
+  _gaq.push(['_setAccount', 'UA-19200263-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -414,7 +444,6 @@ if ("ontouchstart" in document.documentElement) {
   })();
 
 </script>
-
 
 </body>
 </html>
@@ -463,4 +492,3 @@ if ("ontouchstart" in document.documentElement) {
     Cheers!
     
 -->
-
